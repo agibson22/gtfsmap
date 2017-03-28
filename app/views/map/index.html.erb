@@ -7,11 +7,25 @@ html, body {
 	margin: 0;
 	padding: 0;
 }
+.hidden {
+	display: none;
+}
 </style>
+
+<div id="vehicle_id" class="hidden" data-lat="<%= @vehicle_id.to_i %>"></div>
+<div id="latitude" class="hidden" data-lat="<%= @latitude.to_i %>"></div>
+<div id="longitude" class="hidden" data-lat="<%= @longitude.to_i  %>"></div>
+<div id="heading" class="hidden" data-lat="<%= @heading.to_i %>"></div>
 
 <script type="text/javascript">
 function initMap() {
-  var myLatLng = {lat: -25.363, lng: 131.044};
+  var vehicle_id = $("#vehicle_id").data("lat");
+  var latitude = $("#latitude").data("lat");
+  var longitude = $("#longitude").data("lat");
+  var heading = $("#heading").data("lat");
+
+  // gmaps below
+  var myLatLng = {lat: latitude, lng: longitude};
 
   var map = new google.maps.Map(document.getElementById('map'), {
     zoom: 4,
