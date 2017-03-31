@@ -25,6 +25,11 @@ function initMap() {
     var marker = new google.maps.Marker({
       position: vehicle.position,
       title: vehicle.title,
+      icon: {
+        path: google.maps.SymbolPath.FORWARD_CLOSED_ARROW,
+        scale: 5,
+        rotation: vehicle.rotation
+      },
       map: map
     });
   };
@@ -33,7 +38,8 @@ function initMap() {
     <% @vehicle_hashes.each do |h| %>
     {
       position: new google.maps.LatLng(<%= h['lat'] %>, <%= h['long'] %>),
-      title: "<%= h['id'] %>"
+      title: "<%= h['id'] %>",
+      rotation: <%= h['bearing'] %>
     },
     <% end %>
   ];

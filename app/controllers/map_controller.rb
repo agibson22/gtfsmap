@@ -13,7 +13,8 @@ class MapController < ApplicationController
 			vehicle_info = { 
 				"id" => v.vehicle.vehicle.id,
 				"lat" => v.vehicle.position.latitude,
-				"long" => v.vehicle.position.longitude
+				"long" => v.vehicle.position.longitude,
+				"bearing" => v.vehicle.position.bearing
 				}
 			vehicle_hashes << vehicle_info
 		end
@@ -22,3 +23,6 @@ class MapController < ApplicationController
 	@vehicle_hashes = vehicle_hashes
   end
 end
+
+# add the indivdual routes to the map
+# extend the spec
