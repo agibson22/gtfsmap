@@ -12,31 +12,34 @@ html, body {
 }
 </style>
 
-<div id="vehicle_id" class="hidden" data-lat="<%= @vehicle_id.to_i %>"></div>
-<div id="latitude" class="hidden" data-lat="<%= @latitude.to_i %>"></div>
-<div id="longitude" class="hidden" data-lat="<%= @longitude.to_i  %>"></div>
-<div id="heading" class="hidden" data-lat="<%= @heading.to_i %>"></div>
-
 <script type="text/javascript">
 function initMap() {
-  var vehicle_id = $("#vehicle_id").data("lat");
-  var latitude = $("#latitude").data("lat");
-  var longitude = $("#longitude").data("lat");
-  var heading = $("#heading").data("lat");
 
   // gmaps below
-  var myLatLng = {lat: latitude, lng: longitude};
-
   var map = new google.maps.Map(document.getElementById('map'), {
-    zoom: 4,
-    center: myLatLng
+    zoom: 11,
+    center: new google.maps.LatLng(33.65266036987305, -117.99491119384766),
   });
 
-  var marker = new google.maps.Marker({
-    position: myLatLng,
-    map: map,
-    title: 'Hello World!'
-  });
+  function addMarker(vehicle) {
+    var marker = new google.maps.Marker({
+      position: vehicle.position,
+      title: vehicle.title,
+      map: map
+    });
+  };
+
+  var vehicles = [
+    <% @vehicle_hashes.each do |h| %>
+    {
+      position: new google.maps.LatLng(<%= h['lat'] %>, <%= h['long'] %>),
+      title: "<%= h['id'] %>"
+    },
+    <% end %>
+  ];
+  for (var i = 0, vehicle; vehicle = vehicles[i]; i++) {
+    addMarker(vehicle);
+  }
 }
 </script>
 
