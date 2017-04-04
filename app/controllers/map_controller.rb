@@ -14,7 +14,8 @@ class MapController < ApplicationController
 				"id" => v.vehicle.vehicle.id,
 				"lat" => v.vehicle.position.latitude,
 				"long" => v.vehicle.position.longitude,
-				"bearing" => v.vehicle.position.bearing
+				"bearing" => v.vehicle.position.bearing,
+				"route_id" => v.vehicle.trip.route_id
 				}
 			vehicle_hashes << vehicle_info
 		end
@@ -24,5 +25,5 @@ class MapController < ApplicationController
   end
 end
 
-# add the indivdual routes to the map
+# add the indivdual routes to the map using the route_id and saving gtfs to the db
 # extend the spec
